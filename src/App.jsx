@@ -14,6 +14,8 @@ const TIPO_EMOJI = {
 };
 const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
 const STORAGE_KEY = "magic-travel-v4";
+const JSONBIN_ID = "69aef20543b1c97be9c58c5b";
+const JSONBIN_KEY = "$2a$10$R7kpT4HdEAoHgYHARRdu3eryJy/DLcwiiffS0Lf/qYVfSXXfjxZSe";
 
 function fmt(iso){ if(!iso) return "—"; const [y,m,d]=iso.split("-"); return d+" "+MESES[+m-1]+" "+y; }
 function restar(iso,dias){ const d=new Date(iso+"T12:00:00"); d.setDate(d.getDate()-dias); return d.toISOString().split("T")[0]; }
@@ -482,18 +484,24 @@ export default function App(){
   const [syncStatus,setSyncStatus]=useState("loading");
   const [lastSync,setLastSync]=useState(null);
 
-  function cargarDatos(){
+  async function cargarDatos(){
+    setSyncStatus("loading");
     try{
-      const raw=localStorage.getItem(STORAGE_KEY);
-      if(raw){setViajerosState(JSON.parse(raw));}
+      const res=await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}/latest`,{headers:{"X-Master-Key":JSONBIN_KEY}});
+      const json=await res.json();
+      const data=json.record;
+      if(Array.isArray(data)&&data.length>0){setViajerosState(data.filter(v=>v&&v.nombre));}
       setSyncStatus("ok");setLastSync(new Date());
     }catch(e){setSyncStatus("error");}
   }
-  function guardarDatos(data){
-    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));setSyncStatus("ok");setLastSync(new Date());}
-    catch(e){setSyncStatus("error");}
+  async function guardarDatos(data){
+    setSyncStatus("loading");
+    try{
+      await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}`,{method:"PUT",headers:{"Content-Type":"application/json","X-Master-Key":JSONBIN_KEY},body:JSON.stringify(data)});
+      setSyncStatus("ok");setLastSync(new Date());
+    }catch(e){setSyncStatus("error");}
   }
-  useEffect(()=>{cargarDatos();},[]);
+  useEffect(()=>{cargarDatos();const t=setInterval(cargarDatos,30000);return()=>clearInterval(t);},[]);
 
   function setViajeros(fn){
     setViajerosState(prev=>{const next=typeof fn==="function"?fn(prev):fn;guardarDatos(next);return next;});
