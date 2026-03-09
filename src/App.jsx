@@ -523,7 +523,7 @@ export default function App(){
           const diff=diasHasta(r.fecha);
           const done=!!((p.recsDone||{})[recKey(r)]);
           if(diff!==null&&diff>=0&&diff<=1){
-            tareas.push({emoji:"🔔",urgencia:"alta",titulo:r.label+" — "+v.nombre,detalle:p.tipo+" · "+r.info,viajero:v,recKey:recKey(r),paqueteId:p.id});
+            tareas.push({emoji:"🔔",urgencia:"alta",titulo:r.label+" — "+v.nombre,detalle:p.tipo+" · "+r.info,viajero:v,recKey:recKey(r),paqueteId:p.id,done});
           }
         });
       });
