@@ -1,3 +1,5 @@
+
+
 import { useState, useMemo, useEffect } from “react”;
 
 
@@ -518,7 +520,7 @@ const NUEVO_BASE={id:null,nombre:””,personas:2,etapa:“Pago en curso”,not
 
 
 export default function App(){
-const [sesion,setSesion]=useState(()=>{try{return JSON.parse(sessionStorage.getItem(“disnerd-sesion”)||“null”);}catch{return null;}});
+const [sesion,setSesion]=useState(null);
 const [loginUser,setLoginUser]=useState(””);
 const [loginPass,setLoginPass]=useState(””);
 const [loginError,setLoginError]=useState(””);
@@ -603,10 +605,10 @@ const syncLabel=syncStatus===“ok”?“● Guardado”:syncStatus===“error�
 
 function handleLogin(){
 const u=USUARIOS.find(u=>u.user===loginUser.toLowerCase().trim()&&u.pass===loginPass);
-if(u){sessionStorage.setItem(“disnerd-sesion”,JSON.stringify(u));setSesion(u);setLoginError(””);}
+if(u){setSesion(u);setLoginError(””);}
 else{setLoginError(“Usuario o contraseña incorrectos”);}
 }
-function handleLogout(){sessionStorage.removeItem(“disnerd-sesion”);setSesion(null);setLoginUser(””);setLoginPass(””);}
+function handleLogout(){setSesion(null);setLoginUser(””);setLoginPass(””);}
 
 
 if(!sesion) return(
