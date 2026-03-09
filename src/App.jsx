@@ -1,21 +1,4 @@
-Voy a personalizar este artefacto:
 
-App.jsx
-Artefacto interactivo 
-Transforma cualquier artefacto en algo único personalizando sus elementos principales.
-
-Cambiar el tema - Adapta el contenido para un tema diferente
-Actualizar el estilo - Renueva los elementos visuales o el diseño general
-Hacerlo personal - Ajústalo específicamente a tus necesidades
-Comparte tu visión - Yo la haré realidad
-¿Por dónde te gustaría empezar?
-
-
-
-
-
-
-Claude es IA y puede cometer errores. Por favor, verifica las respuestas.
 import { useState, useMemo, useEffect } from "react";
 
 const TIPOS = ["Paquete Disney","Paquete Universal","Tickets Disney","Tickets Disney Expedia","Tickets Universal Expedia","Tickets Universal VAX","Hotel Expedia","Crucero Disney","Disneyland París"];
