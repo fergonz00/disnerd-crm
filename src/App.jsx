@@ -618,7 +618,7 @@ if(!sesion) return(
 <div style={{textAlign:“center”,marginBottom:28}}>
 <div style={{fontSize:48,marginBottom:8}}>🏰</div>
 <div style={{fontWeight:900,fontSize:24,color:”#3d0026”,fontFamily:“Playfair Display,serif”}}>Disnerd CRM</div>
-<div style={{fontSize:13,color:”#ad5c7a”,marginTop:4}}>Magic Travel Agency ✨</div>
+<div style={{fontSize:13,color:”#ad5c7a”,marginTop:4}}>Magic Travel ✨</div>
 </div>
 <div style={{marginBottom:16}}>
 <div style={{fontSize:12,fontWeight:700,color:”#ad5c7a”,marginBottom:6}}>USUARIO</div>
