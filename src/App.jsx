@@ -866,7 +866,7 @@ return(
   {modalRapido&&<ModalCargaRapida onClose={()=>setModalRapido(false)} onSave={guardarVarios}/>}
   {modalImportar&&<ModalImportar onClose={()=>setModalImportar(false)} onSave={guardarVarios}/>}
 </div>
-```
+
 
 
 );
