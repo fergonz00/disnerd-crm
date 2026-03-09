@@ -522,7 +522,7 @@ export default function App(){
         recordatoriosPaquete(p).forEach(r=>{
           const diff=diasHasta(r.fecha);
           const done=!!((p.recsDone||{})[recKey(r)]);
-          if(!done&&diff!==null&&diff>=0&&diff<=1){
+          if(diff!==null&&diff>=0&&diff<=1){
             tareas.push({emoji:"🔔",urgencia:"alta",titulo:r.label+" — "+v.nombre,detalle:p.tipo+" · "+r.info,viajero:v,recKey:recKey(r),paqueteId:p.id});
           }
         });
