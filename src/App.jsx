@@ -561,7 +561,7 @@ export default function App(){
       const diff=diasHasta(r.fecha);
       const done=!!((p.recsDone||{})[recKey(r)]);
       return{...r,viajeroNombre:v.nombre,paqueteTipo:p.tipo,viajero:v,diff,done};
-    }).filter(r=>!r.done&&r.diff!==null&&r.diff>=0&&r.diff<=75))).sort((a,b)=>a.diff-b.diff);
+    }).filter(r=>r.diff!==null&&r.diff>=0&&r.diff<=75))).sort((a,b)=>a.diff-b.diff);
   },[viajeros]);
 
   const filtrados=viajeros.filter(v=>v.nombre.toLowerCase().includes(busqueda.toLowerCase())&&(filtroEtapa==="Todas"||v.etapa===filtroEtapa));
